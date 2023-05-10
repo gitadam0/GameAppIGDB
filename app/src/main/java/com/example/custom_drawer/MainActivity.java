@@ -7,11 +7,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.custom_drawer.login_registration.login;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -19,10 +22,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     DrawerLayout drawerLayout;
 
+    private FirebaseAuth mAuth;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAuth = FirebaseAuth.getInstance();
 
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -74,8 +82,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                  new Fragment2()).commit();
                 break;
             case R.id.nav3:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new Fragment3()).commit();
+                FirebaseAuth.getInstance().signOut();
+                Intent intent=new Intent(MainActivity.this, login.class);
+                startActivity(intent);
+                finish();
                 break;
         }
         drawerLayout.close();

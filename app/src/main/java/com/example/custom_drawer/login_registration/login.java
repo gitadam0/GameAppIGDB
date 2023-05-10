@@ -156,7 +156,7 @@ public class login extends AppCompatActivity {
                     Toast.makeText(login.this, "email or password cant be empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                mAuth.signInWithEmailAndPassword("a@gmail.com", p)
+                mAuth.signInWithEmailAndPassword(e, p)
                         .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -173,7 +173,7 @@ public class login extends AppCompatActivity {
                                 } else {
                                     // If sign in fails, display a message to the user.
 
-                                    Toast.makeText(login.this, "Authentication failed.",
+                                    Toast.makeText(login.this, "wrong email or password",
                                             Toast.LENGTH_SHORT).show();
 
                                 }
