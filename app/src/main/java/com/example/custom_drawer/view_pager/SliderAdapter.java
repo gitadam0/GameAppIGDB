@@ -1,15 +1,21 @@
 package com.example.custom_drawer.view_pager;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.custom_drawer.Fragment1;
+import com.example.custom_drawer.MainActivity;
 import com.example.custom_drawer.R;
 
 import com.squareup.picasso.Picasso;
@@ -23,10 +29,12 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
     private List<Game> list;
 
     private ViewPager2 viewPager2;
+    Context c;
 
-     public SliderAdapter(List<Game> list, ViewPager2 viewPager2) {
+     public SliderAdapter(Context context, List<Game> list, ViewPager2 viewPager2) {
         this.list = list;
         this.viewPager2 = viewPager2;
+         this.c = context;
     }
 
     @NonNull
@@ -38,7 +46,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
 
 
     @Override
-    public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SliderViewHolder holder, @SuppressLint("RecyclerView") int position) {
 //        if (position >list.size()-2) {
 //            viewPager2.setCurrentItem(0, true);
 //        }
@@ -47,8 +55,29 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
         imageurl="https:"+"//images.igdb.com/igdb/image/upload/t_720p/"+list.get(position).getCover().getImageId()+".jpg";
 
         holder.Setimage(imageurl);
-        holder.name.setText(list.get(position).getName());
+        
+        
+//        holder.name.setText(list.get(position).getName());
 //        holder.Setname(list.get(positi0on));
+        
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                holder.showtoast(position);
+
+                Toast.makeText(c, list.get(position).getName()+"", Toast.LENGTH_SHORT).show();
+
+                Intent intent=new Intent(c,  pager_game.class);
+                intent.putExtra("game",list.get(position));
+                c.startActivity(intent);
+
+
+
+
+            }
+        });
+        
+        
     }
 
     @Override
@@ -64,7 +93,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
          SliderViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView=itemView.findViewById(R.id.img);
-            name=itemView.findViewById(R.id.name);
+//            name=itemView.findViewById(R.id.name);
         }
 
         void Setimage(String slideritem){
@@ -72,8 +101,17 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
             Picasso.get().load(slideritem).into(imageView);
 
         }
-        void Setname(Slideritem slideritem){
-            name.setText(slideritem.getName());
+//        void Setname(Slideritem slideritem){
+//            name.setText(slideritem.getName());
+//        }
+
+        void showtoast(int pos){
+
+            Toast.makeText(c, list.get(pos).getName()+"", Toast.LENGTH_SHORT).show();
+
+
         }
+
+
     }
 }
