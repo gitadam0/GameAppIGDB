@@ -31,7 +31,7 @@ public class Fragment1 extends Fragment {
     TextView t;
     ViewPager2 viewPager2;
     
-    RecyclerView recy;
+    RecyclerView recy,recy_hory;
 
 
 
@@ -99,14 +99,19 @@ public class Fragment1 extends Fragment {
         task2.execute();
         
         recy=view.findViewById(R.id.recy);
+        recy_hory=view.findViewById(R.id.recy_hory);
+
+
 //        GridLayoutManager
 //        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(),2);
         recy.setLayoutManager(layoutManager);
 
         recy_adapter adapter1 = null;
+        recy_adapter_hory adapter2 = null;
         try {
              adapter1=new recy_adapter(task2.get(),getContext());
+             adapter2=new recy_adapter_hory(task2.get(),getContext());
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -115,7 +120,16 @@ public class Fragment1 extends Fragment {
         recy.setAdapter(adapter1);
 
 
+
+        LinearLayoutManager layoutManager_hory = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
+        recy_hory.setLayoutManager(layoutManager_hory);
+
+        recy_hory.setAdapter(adapter2);
+
+
+
         return view;
+
     }
 
 

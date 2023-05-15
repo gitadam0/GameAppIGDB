@@ -18,7 +18,7 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#C31515"
+        android:background="#292929"
         app:title="Games"
         android:id="@+id/toolbar"
         app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
@@ -27,7 +27,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        tools:layout="@layout/fragment1"
         android:id="@+id/fragment_container"/>
 </LinearLayout>
 
