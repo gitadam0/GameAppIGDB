@@ -9,7 +9,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.custom_drawer.login_registration.login;
@@ -29,6 +31,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//
+//        Fade fade=new Fade();
+//        View decor= getWindow().getDecorView();
+//        fade.excludeTarget(decor.findViewById(R.id.toolbar),true);
+////        fade.excludeTarget(decor.findViewById(com.google.android.gms.auth.api.R.id.status_bar_latest_event_content),true);
+////        fade.excludeTarget(decor.findViewById(R.id.navigationBarBackground),true);
+//        getWindow().setEnterTransition(fade);
+//        getWindow().setExitTransition(fade);
 
         mAuth = FirebaseAuth.getInstance();
 

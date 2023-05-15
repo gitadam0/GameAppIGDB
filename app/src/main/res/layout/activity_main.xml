@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:fitsSystemWindows="true"
     android:id="@+id/drawer_layout"
 
@@ -19,7 +18,7 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/teal_200"
+        android:background="#C31515"
         app:title="Games"
         android:id="@+id/toolbar"
         app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
@@ -28,6 +27,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:id="@+id/fragment_container"/>
 </LinearLayout>
 
@@ -36,6 +36,7 @@
         android:layout_height="match_parent"
         android:id="@+id/navigation_view"
         android:layout_gravity="start"
+
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/drawer_menu"
         />

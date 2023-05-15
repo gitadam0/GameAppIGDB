@@ -1,6 +1,8 @@
 package com.example.custom_drawer.view_pager;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -54,24 +58,30 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
         String imageurl="";
         imageurl="https:"+"//images.igdb.com/igdb/image/upload/t_720p/"+list.get(position).getCover().getImageId()+".jpg";
 
-        holder.Setimage(imageurl);
-        
+//        holder.Setimage(imageurl);
+        Picasso.get().load(imageurl).into(holder.imageView);
         
 //        holder.name.setText(list.get(position).getName());
 //        holder.Setname(list.get(positi0on));
-        
+
+        Game data = list.get(position);
+
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                holder.showtoast(position);
 
-                Toast.makeText(c, list.get(position).getName()+"", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(c, list.get(position).getName()+"", Toast.LENGTH_SHORT).show();
 
                 Intent intent=new Intent(c,  pager_game.class);
                 intent.putExtra("game",list.get(position));
                 c.startActivity(intent);
 
-
+//                Intent intent=new Intent(c,  pager_game.class);
+//                intent.putExtra("game",data);
+//                ActivityOptions.makeSceneTransitionAnimation((Activity) c).toBundle();
+//                ActivityOptionsCompat activityOptionsCompat= ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) c,holder.imageView, ViewCompat.getTransitionName(holder.imageView));
+//                c.startActivity(intent,activityOptionsCompat.toBundle());
 
 
             }

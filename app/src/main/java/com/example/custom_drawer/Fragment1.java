@@ -3,6 +3,7 @@ package com.example.custom_drawer;
 import static androidx.recyclerview.widget.RecyclerView.HORIZONTAL;
 
 import android.os.Bundle;
+import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,8 @@ public class Fragment1 extends Fragment {
         igdbdata_popular5 task;
         task = new igdbdata_popular5();
         task.execute();
+
+
 
 
 

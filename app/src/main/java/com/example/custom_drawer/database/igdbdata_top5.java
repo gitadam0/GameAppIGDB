@@ -28,10 +28,9 @@ public class igdbdata_top5 extends AsyncTask<Void, Void, List<Game>> {
 
         IGDBWrapper wrapper = IGDBWrapper.INSTANCE;
         wrapper.setCredentials("bq2pe47e9t3uulm2oqj4fddej6z6z3", "11d0g80phx6lg799j2b5njk5lay2cl");
-        APICalypse apicalypse1 = new APICalypse().fields("name,cover.*,rating_count")
-                .where("cover != null & rating != null & aggregated_rating_count != null")
-                .limit(5)
-                .sort("rating_count", Sort.DESCENDING);
+        APICalypse apicalypse1 = new APICalypse().fields("name,cover.*,rating_count,rating")
+                .where("cover != null & rating != null & aggregated_rating_count != null ")
+                .limit(200).sort("rating_count",Sort.DESCENDING);
         try{
             games = ProtoRequestKt.games(wrapper, apicalypse1);
 

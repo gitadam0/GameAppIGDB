@@ -1,6 +1,9 @@
 package com.example.custom_drawer;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +12,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.custom_drawer.view_pager.pager_game;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -41,6 +49,39 @@ public class recy_adapter extends RecyclerView.Adapter<recy_adapter.ViewHolder> 
         String imageurl="";
         imageurl="https:"+"//images.igdb.com/igdb/image/upload/t_720p/"+data.getCover().getImageId()+".jpg";
         Picasso.get().load(imageurl).into(holder.img);
+        holder.name.setText(data.getName());
+
+        String r= String.valueOf(data.getRating());
+        String r2= Double.toString(data.getRating());
+
+        holder.rating.setText(r.charAt(0)+"⭐");
+
+
+        holder.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent=new Intent(context,  pager_game.class);
+//                intent.putExtra("game",data);
+//                context.startActivity(intent);
+
+
+
+
+                Intent intent=new Intent(context,  pager_game.class);
+                intent.putExtra("game",data);
+                ActivityOptions.makeSceneTransitionAnimation((Activity) context).toBundle();
+                ActivityOptionsCompat activityOptionsCompat= ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context,holder.img, ViewCompat.getTransitionName(holder.img));
+                context.startActivity(intent,activityOptionsCompat.toBundle());
+
+
+
+
+
+
+
+
+            }
+        });
     }
 
 
@@ -55,10 +96,13 @@ public class recy_adapter extends RecyclerView.Adapter<recy_adapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView img;
+        TextView name,rating;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             img = itemView.findViewById(R.id.img);
+             name=itemView.findViewById(R.id.txtname);
+             rating=itemView.findViewById(R.id.txtrating);
         }
     }
 }
