@@ -1,5 +1,6 @@
 package com.example.custom_drawer;
 
+import static android.view.View.VISIBLE;
 import static androidx.recyclerview.widget.RecyclerView.HORIZONTAL;
 
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.CompositePageTransformer;
+import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.custom_drawer.database.igdbdata_popular5;
@@ -32,6 +36,7 @@ public class Fragment1 extends Fragment {
     ViewPager2 viewPager2;
     
     RecyclerView recy,recy_hory;
+    ProgressBar progressBar;
 
 
 
@@ -46,36 +51,13 @@ public class Fragment1 extends Fragment {
 
         igdbdata_popular5 task;
         task = new igdbdata_popular5();
+
         task.execute();
-
-
-
-
-
-//
-//
-//t=view.findViewById(R.id.textView);
-//
-//        view.findViewById(R.id.textView).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                try {
-//                    String ss=task.get()+"";
-//                    t.setText(ss);
-//                } catch (ExecutionException e) {
-//                    e.printStackTrace();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
 
 
          viewPager2=view.findViewById(R.id.viewpager2);
         CircleIndicator3 indicator=view.findViewById(R.id.indicator);
         
-
-
 
 
         SliderAdapter adapter = null;
@@ -89,23 +71,42 @@ public class Fragment1 extends Fragment {
         }
 
 
-        viewPager2.setAdapter(adapter);
 
+        viewPager2.setOffscreenPageLimit(3);
+        viewPager2.setClipChildren(false);
+        viewPager2.setClipToPadding(false);
+        viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+
+        CompositePageTransformer transformer=new CompositePageTransformer();
+        transformer.addTransformer(new MarginPageTransformer(8));
+        transformer.addTransformer(new ViewPager2.PageTransformer() {
+            @Override
+            public void transformPage(@NonNull View page, float position) {
+                float r=1- Math.abs(position);
+                page.setScaleY(0.8f+r*0.2f);
+            }
+        });
+
+        viewPager2.setPageTransformer(transformer);
+        viewPager2.setAdapter(adapter);
 
         indicator.setViewPager(viewPager2);
 
+
         igdbdata_top5 task2;
-        task2 = new igdbdata_top5();
+
+        task2 = new igdbdata_top5(view);
+
         task2.execute();
         
         recy=view.findViewById(R.id.recy);
         recy_hory=view.findViewById(R.id.recy_hory);
 
+        progressBar=view.findViewById(R.id.loadingbar);
 
-//        GridLayoutManager
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(),2);
-        recy.setLayoutManager(layoutManager);
+
+
+
 
         recy_adapter adapter1 = null;
         recy_adapter_hory adapter2 = null;
@@ -117,6 +118,11 @@ public class Fragment1 extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        //        GridLayoutManager
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(),2);
+        recy.setLayoutManager(layoutManager);
         recy.setAdapter(adapter1);
 
 

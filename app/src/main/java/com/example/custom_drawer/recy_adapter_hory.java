@@ -15,7 +15,6 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.custom_drawer.view_pager.pager_game;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -53,7 +52,7 @@ public class recy_adapter_hory extends RecyclerView.Adapter<recy_adapter_hory.Vi
         String r= String.valueOf(data.getRating());
         String r2= Double.toString(data.getRating());
 
-        holder.rating.setText(r.charAt(0)+"⭐");
+//        holder.rating.setText(r.charAt(0)+"⭐");
 
 
         holder.img.setOnClickListener(new View.OnClickListener() {
@@ -66,11 +65,11 @@ public class recy_adapter_hory extends RecyclerView.Adapter<recy_adapter_hory.Vi
 
 
 
-                Intent intent=new Intent(context,  pager_game.class);
+                Intent intent=new Intent(context,  single_game.class);
                 intent.putExtra("game",data);
                 ActivityOptions.makeSceneTransitionAnimation((Activity) context).toBundle();
                 ActivityOptionsCompat activityOptionsCompat= ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context,holder.img, ViewCompat.getTransitionName(holder.img));
-                context.startActivity(intent,activityOptionsCompat.toBundle());
+                context.startActivity(intent);
 
 
 
@@ -102,7 +101,7 @@ public class recy_adapter_hory extends RecyclerView.Adapter<recy_adapter_hory.Vi
             img = itemView.findViewById(R.id.img);
             img2 = itemView.findViewById(R.id.img2);
              name=itemView.findViewById(R.id.txtname);
-             rating=itemView.findViewById(R.id.txtrating);
+//             rating=itemView.findViewById(R.id.txtrating);
         }
     }
 }

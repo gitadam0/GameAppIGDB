@@ -1,14 +1,14 @@
-package com.example.custom_drawer.view_pager;
+package com.example.custom_drawer;
 
-import androidx.annotation.RequiresApi;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.CompositePageTransformer;
+import androidx.viewpager2.widget.MarginPageTransformer;
+import androidx.viewpager2.widget.ViewPager2;
 
-import android.app.ActionBar;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.transition.Transition;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
@@ -16,26 +16,29 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.custom_drawer.MainActivity;
-import com.example.custom_drawer.R;
+import com.example.custom_drawer.database.igdbdata_popular5;
+import com.example.custom_drawer.screenshots_singlegam.Screenshots_view_adapter;
+import com.example.custom_drawer.view_pager.SliderAdapter;
 import com.squareup.picasso.Picasso;
+
+import java.util.concurrent.ExecutionException;
 
 import proto.Game;
 
-public class pager_game extends AppCompatActivity {
+public class single_game extends AppCompatActivity {
     ImageView img;
     TextView name,progress;
     ImageButton back;
     ProgressBar progressBar;
+    ViewPager2 viewPager2;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pager_game);
+        setContentView(R.layout.singl_game);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().hide();
@@ -47,7 +50,21 @@ public class pager_game extends AppCompatActivity {
         progressBar=findViewById(R.id.progressBar);
         progress=findViewById(R.id.progress);
 
+
         Game game= (Game) getIntent().getSerializableExtra("game");
+
+        viewPager2=findViewById(R.id.screenshots_pager);
+//        igdbdata_popular5 task;
+//        task = new igdbdata_popular5();
+//
+//        task.execute();
+        Screenshots_view_adapter adapter = null;
+
+        adapter = new Screenshots_view_adapter(single_game.this, game ,viewPager2);
+
+        viewPager2.setAdapter(adapter);
+
+
 
 
         String imageurl="";

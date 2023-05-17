@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.custom_drawer.login_registration.login;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -42,7 +43,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mAuth = FirebaseAuth.getInstance();
 
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        Toast.makeText(this, currentUser.getEmail()+"", Toast.LENGTH_SHORT).show();
+
+
         toolbar=findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -51,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawerLayout,toolbar,
                 R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
+
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
+
         toggle.syncState();
 
 

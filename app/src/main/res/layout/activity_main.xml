@@ -18,8 +18,9 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#292929"
+        android:background="#101010"
         app:title="Games"
+        app:titleTextColor="@color/white"
         android:id="@+id/toolbar"
         app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
         />

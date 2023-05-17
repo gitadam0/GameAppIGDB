@@ -8,17 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.util.Pair;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.custom_drawer.view_pager.pager_game;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -67,7 +63,7 @@ public class recy_adapter extends RecyclerView.Adapter<recy_adapter.ViewHolder> 
 
 
 
-                Intent intent=new Intent(context,  pager_game.class);
+                Intent intent=new Intent(context,  single_game.class);
                 intent.putExtra("game",data);
                 ActivityOptions.makeSceneTransitionAnimation((Activity) context).toBundle();
                 ActivityOptionsCompat activityOptionsCompat= ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context,holder.img, ViewCompat.getTransitionName(holder.img));
