@@ -12,7 +12,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
@@ -99,10 +101,6 @@ public class Fragment1 extends Fragment {
 
 
 
-
-
-
-
         recy_adapter adapter1 = null;
         recy_adapter_hory adapter2 = null;
         try {
@@ -126,7 +124,10 @@ public class Fragment1 extends Fragment {
         recy_hory.setLayoutManager(layoutManager_hory);
 
         recy_hory.setAdapter(adapter2);
+        SnapHelper snapHelper = new LinearSnapHelper();
 
+        // on below line we are attaching this snap helper to our recycler view.
+        snapHelper.attachToRecyclerView(recy_hory);
 
 
         return view;
