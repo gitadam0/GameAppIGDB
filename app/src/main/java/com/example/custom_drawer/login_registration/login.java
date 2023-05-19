@@ -1,5 +1,6 @@
 package com.example.custom_drawer.login_registration;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +27,7 @@ public class login extends AppCompatActivity {
     EditText email,password;
     Button login1,reg,google;
 
-
+    ProgressDialog progressDialog;
      private FirebaseAuth mAuth;
 
     private static final int RC_SIGN_IN = 123;
@@ -150,10 +151,20 @@ public class login extends AppCompatActivity {
         login1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog = new ProgressDialog(login.this);
+                progressDialog.setMessage("Loading..."); // Setting Message
+                 // Setting Title
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+                progressDialog.show(); // Display Progress Dialog
+                progressDialog.setCancelable(false);
+
+
                 String e=email.getText().toString();
                 String p=password.getText().toString();
                 if(e.isEmpty() || p.isEmpty()){
+
                     Toast.makeText(login.this, "email or password cant be empty", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                     return;
                 }
                 mAuth.signInWithEmailAndPassword(e, p)
@@ -168,20 +179,20 @@ public class login extends AppCompatActivity {
                                     Intent intent=new Intent(login.this,MainActivity.class);
                                     intent.putExtra("e",e);
                                     startActivity(intent);
-
+                                    progressDialog.dismiss();
 
                                 } else {
                                     // If sign in fails, display a message to the user.
 
                                     Toast.makeText(login.this, "wrong email or password",
                                             Toast.LENGTH_SHORT).show();
-
+                                    progressDialog.dismiss();
                                 }
                             }
                         });
 
 
-                Toast.makeText(login.this, e+" "+p, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(login.this, e+" "+p, Toast.LENGTH_SHORT).show();
             }
         });
 

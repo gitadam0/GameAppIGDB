@@ -1,10 +1,6 @@
 package com.example.custom_drawer;
 
-import static android.view.View.VISIBLE;
-import static androidx.recyclerview.widget.RecyclerView.HORIZONTAL;
-
 import android.os.Bundle;
-import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +13,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.custom_drawer.database.igdbdata_popular5;
-import com.example.custom_drawer.database.igdbdata_top5;
+import com.example.custom_drawer.database.igdbdata_top25;
 import com.example.custom_drawer.view_pager.SliderAdapter;
 
 import java.util.concurrent.ExecutionException;
@@ -93,16 +88,16 @@ public class Fragment1 extends Fragment {
         indicator.setViewPager(viewPager2);
 
 
-        igdbdata_top5 task2;
+        igdbdata_top25 task2;
 
-        task2 = new igdbdata_top5(view);
+        task2 = new igdbdata_top25(view,getActivity());
 
         task2.execute();
         
         recy=view.findViewById(R.id.recy);
         recy_hory=view.findViewById(R.id.recy_hory);
 
-        progressBar=view.findViewById(R.id.loadingbar);
+
 
 
 

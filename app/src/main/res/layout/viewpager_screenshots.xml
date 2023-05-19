@@ -10,7 +10,8 @@ android:background="#00C60C0C"
     <ImageView
 
         android:layout_width="match_parent"
-        android:layout_height="190dp"
+        android:layout_height="match_parent"
+android:layout_marginHorizontal="20dp"
 android:src="@drawable/marioimg2"
         android:id="@+id/img"
         android:scaleType="fitXY"

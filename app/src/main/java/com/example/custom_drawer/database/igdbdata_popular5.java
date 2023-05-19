@@ -28,7 +28,7 @@ public class igdbdata_popular5 extends AsyncTask<Void, Void, List<Game>> {
 
         IGDBWrapper wrapper = IGDBWrapper.INSTANCE;
         wrapper.setCredentials("bq2pe47e9t3uulm2oqj4fddej6z6z3", "11d0g80phx6lg799j2b5njk5lay2cl");
-        APICalypse apicalypse1 = new APICalypse().fields("name,cover.*,rating_count,rating,screenshots.*")
+        APICalypse apicalypse1 = new APICalypse().fields("name,cover.*,rating_count,rating,screenshots.*,genres.*,release_dates.human,game_modes.*,summary,videos.*")
                 .where("cover != null & rating != null & aggregated_rating_count != null & rating_count>1000 ")
                 .limit(5)
                 .sort("popularity", Sort.DESCENDING);
