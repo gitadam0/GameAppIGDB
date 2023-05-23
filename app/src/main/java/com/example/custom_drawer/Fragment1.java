@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,7 +24,10 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.custom_drawer.database.igdbdata_popular5;
 import com.example.custom_drawer.database.igdbdata_top25;
 import com.example.custom_drawer.view_pager.SliderAdapter;
+import com.google.protobuf.Any;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import me.relex.circleindicator.CircleIndicator3;
@@ -128,6 +133,21 @@ public class Fragment1 extends Fragment {
 
         // on below line we are attaching this snap helper to our recycler view.
         snapHelper.attachToRecyclerView(recy_hory);
+
+
+
+        Spinner mSpinner = view.findViewById(R.id.spinner);
+
+                // Create a list to display in the Spinner
+        List<String> mList = new ArrayList<String>() ;
+        mList.add("Ddd");
+
+        // Create an adapter as shown below
+        ArrayAdapter mArrayAdapter =new ArrayAdapter<>(view.getContext(), R.layout.spinner_list, mList);
+        mArrayAdapter.setDropDownViewResource(R.layout.spinner_list);
+
+        // Set the adapter to the Spinner
+        mSpinner.setAdapter(mArrayAdapter);
 
 
         return view;

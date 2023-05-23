@@ -18,9 +18,10 @@
         android:textColor="@color/black"
         android:text="ADAM MOUADDINR"/>
     <TextView
+        android:id="@+id/mygmail_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="adm.mdd@gmail.com"
+        android:text="@string/app_name"
         android:layout_marginBottom="5dp"/>
 
 

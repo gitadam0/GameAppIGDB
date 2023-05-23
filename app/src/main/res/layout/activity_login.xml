@@ -5,28 +5,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".login">
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textColor="@color/purple_500"
-    android:text="LOGIN"
-    android:textSize="27dp"
-    android:gravity="center"/>
+    android:background="#F6F6F6"
+    android:layout_gravity="center"
+    android:gravity="center"
+    tools:context=".login_registration.login">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:src="@drawable/igdbpic"
+            android:scaleType="centerCrop"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X"
+            android:textColor="#4DA51E"
+            android:textSize="50dp"/>
+        <ImageView
+            android:layout_width="150dp"
+
+            android:layout_height="150dp"
+            android:src="@drawable/gamstore3copy"
+            android:scaleType="fitCenter"
+            />
+    </LinearLayout>
     <EditText
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="email"
+        android:layout_margin="10dp"
         android:id="@+id/email"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="password"
+        android:layout_margin="10dp"
         android:id="@+id/password"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Log In"
+        android:layout_margin="10dp"
         android:id="@+id/login"/>
 
     <Button
@@ -34,7 +60,15 @@
         android:layout_height="wrap_content"
         android:text="register"
         android:layout_marginTop="20dp"
-        android:id="@+id/register_p"/>
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#2461AA"
+        android:id="@+id/register_p"
+        android:text="no acount? create account"
+
+        />
 
     <Button
         android:layout_width="match_parent"
@@ -42,6 +76,7 @@
         android:text="google auth"
         android:layout_marginTop="20dp"
         android:id="@+id/google"/>
+
 
 
 </LinearLayout>

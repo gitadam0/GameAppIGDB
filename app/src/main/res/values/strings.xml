@@ -4,5 +4,14 @@
     <string name="navigation_drawer_close">close navigation drawer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <array name="hubungan">
+        <item>Choice</item>
+        <item>CHILD</item>
+        <item>PARENT</item>
+        <item>HUSBAND</item>
+        <item>WIFE</item>
+    </array>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="user_gmail"
 
 </resources>

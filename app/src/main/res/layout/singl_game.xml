@@ -187,13 +187,6 @@
                 app:layout_constraintStart_toEndOf="@+id/textView12"
                 app:layout_constraintTop_toBottomOf="@+id/mode" />
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/screenshots_pager"
-                android:layout_width="match_parent"
-                android:layout_height="210dp"
-                android:layout_marginTop="5dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
 
             <TextView
@@ -205,7 +198,7 @@
                 android:text="Description :"
                 android:textColor="#FFFFFF"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/screenshots_pager" />
+                app:layout_constraintTop_toBottomOf="@+id/recy_hory" />
 
             <TextView
                 android:id="@+id/description"
@@ -243,11 +236,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tutorial"
                 app:enableAutomaticInitialization="false"
-                />
+                >
 
+            </com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recy_hory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

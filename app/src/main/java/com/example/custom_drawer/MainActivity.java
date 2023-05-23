@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.transition.Fade;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.custom_drawer.login_registration.login;
@@ -22,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     Toolbar toolbar;
-
+TextView gmail_text;
     DrawerLayout drawerLayout;
 
     private FirebaseAuth mAuth;
@@ -32,6 +33,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        gmail_text = findViewById(R.id.mygmail_head);
+//        gmail_text.setText("jjjjjjjjjjj");
+
+
+
 //
 //        Fade fade=new Fade();
 //        View decor= getWindow().getDecorView();
@@ -52,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
+
+
 
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,
                 drawerLayout,toolbar,
@@ -97,8 +106,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 new Fragment1()).commit();
                 break;
             case R.id.nav2:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                 new Fragment2()).commit();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+//                 new MapsFragment()).commit();
+                Intent i=new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(i);
+                finish();
                 break;
             case R.id.nav3:
                 FirebaseAuth.getInstance().signOut();

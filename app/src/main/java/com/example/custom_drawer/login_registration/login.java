@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,7 +26,9 @@ import com.google.firebase.auth.OAuthProvider;
 
 public class login extends AppCompatActivity {
     EditText email,password;
-    Button login1,reg,google;
+    Button login1,google;
+
+    TextView reg;
 
     ProgressDialog progressDialog;
      private FirebaseAuth mAuth;

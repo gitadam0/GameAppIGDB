@@ -51,7 +51,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
 //        }
 
         String imageurl="";
-        imageurl="https:"+"//images.igdb.com/igdb/image/upload/t_720p/"+list.get(position).getCover().getImageId()+".jpg";
+        imageurl="https:"+"//images.igdb.com/igdb/image/upload/t_1080p/"+list.get(position).getCover().getImageId()+".jpg";
 
 //        holder.Setimage(imageurl);
         Picasso.get().load(imageurl).into(holder.imageView);

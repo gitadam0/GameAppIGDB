@@ -2,7 +2,10 @@ package com.example.custom_drawer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
@@ -22,7 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.example.custom_drawer.database.Igdbdata_top25_activity;
 import com.example.custom_drawer.database.igdbdata_popular5;
+import com.example.custom_drawer.database.igdbdata_top25;
 import com.example.custom_drawer.screenshots_singlegam.Screenshots_view_adapter;
 import com.example.custom_drawer.view_pager.SliderAdapter;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.customui.DefaultPlayerUiController;
@@ -47,7 +52,7 @@ public class single_game extends AppCompatActivity {
     ImageButton back;
     ProgressBar progressBar;
     ViewPager2 viewPager2;
-
+    RecyclerView recy_hory;
     ProgressDialog progressDialog;
 
 
@@ -177,16 +182,12 @@ public class single_game extends AppCompatActivity {
             }
         });
 
-        viewPager2=findViewById(R.id.screenshots_pager);
-//        igdbdata_popular5 task;
-//        task = new igdbdata_popular5();
-//
-//        task.execute();
+
+
         Screenshots_view_adapter adapter = null;
 
         adapter = new Screenshots_view_adapter(single_game.this, game ,viewPager2);
 
-        viewPager2.setAdapter(adapter);
 
 
 
@@ -202,6 +203,32 @@ public class single_game extends AppCompatActivity {
 //                progressDialog.dismiss();
 //            }
 //        }).start();
+
+
+        Igdbdata_top25_activity task2;
+
+        task2 = new Igdbdata_top25_activity();
+
+        task2.execute();
+
+        recy_adapter_hory adapter2 = null;
+        try {
+
+            adapter2=new recy_adapter_hory(task2.get(),single_game.this);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        recy_hory=findViewById(R.id.recy_hory);
+        LinearLayoutManager layoutManager_hory = new LinearLayoutManager(single_game.this,LinearLayoutManager.HORIZONTAL,false);
+        recy_hory.setLayoutManager(layoutManager_hory);
+
+        recy_hory.setAdapter(adapter);
+        SnapHelper snapHelper = new LinearSnapHelper();
+
+        // on below line we are attaching this snap helper to our recycler view.
+        snapHelper.attachToRecyclerView(recy_hory);
 
 
 
