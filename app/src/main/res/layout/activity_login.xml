@@ -40,6 +40,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="email"
+        android:textColor="#25B128"
+        android:textColorHint="@color/black"
         android:layout_margin="10dp"
         android:id="@+id/email"/>
     <EditText
@@ -47,6 +49,8 @@
         android:layout_height="wrap_content"
         android:hint="password"
         android:layout_margin="10dp"
+        android:textColor="#25B128"
+        android:textColorHint="@color/black"
         android:id="@+id/password"/>
     <Button
         android:layout_width="match_parent"
@@ -55,12 +59,7 @@
         android:layout_margin="10dp"
         android:id="@+id/login"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="register"
-        android:layout_marginTop="20dp"
-        />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
