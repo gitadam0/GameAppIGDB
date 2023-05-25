@@ -12,6 +12,6 @@
         <item>WIFE</item>
     </array>
     <string name="title_activity_maps">MapsActivity</string>
-    <string name="user_gmail"
+    <string name="user_gmail">test@test.com</string>
 
 </resources>

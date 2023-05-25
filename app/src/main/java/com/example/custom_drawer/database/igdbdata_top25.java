@@ -56,7 +56,7 @@ public class igdbdata_top25 extends AsyncTask<Void, Void, List<Game>> {
 
         IGDBWrapper wrapper = IGDBWrapper.INSTANCE;
         wrapper.setCredentials("bq2pe47e9t3uulm2oqj4fddej6z6z3", "11d0g80phx6lg799j2b5njk5lay2cl");
-        APICalypse apicalypse1 = new APICalypse().fields("name,cover.*,rating_count,rating,screenshots.*,genres.*,release_dates.human,game_modes.*,summary,videos.*")
+        APICalypse apicalypse1 = new APICalypse().fields("name,cover.image_id,rating_count,rating,screenshots.image_id,genres.name,release_dates.human,game_modes.name,summary,videos.video_id")
                 .where("cover != null & rating != null & aggregated_rating_count != null ")
                 .limit(25).sort("rating_count",Sort.DESCENDING);
         try{

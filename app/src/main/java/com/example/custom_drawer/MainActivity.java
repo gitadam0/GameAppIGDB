@@ -7,9 +7,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.transition.Fade;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -34,8 +36,6 @@ TextView gmail_text;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        gmail_text = findViewById(R.id.mygmail_head);
-//        gmail_text.setText("jjjjjjjjjjj");
 
 
 
@@ -50,8 +50,6 @@ TextView gmail_text;
 
         mAuth = FirebaseAuth.getInstance();
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        Toast.makeText(this, currentUser.getEmail()+"", Toast.LENGTH_SHORT).show();
 
 
         toolbar=findViewById(R.id.toolbar);
@@ -72,13 +70,24 @@ TextView gmail_text;
         toggle.syncState();
 
 
+
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        Toast.makeText(this, currentUser.getEmail()+"", Toast.LENGTH_SHORT).show();
+
+
         NavigationView navigationView=findViewById(R.id.navigation_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView t= headerView.findViewById(R.id.mygmail_head);
+        t.setText(currentUser.getEmail());
+
         navigationView.setNavigationItemSelectedListener(this);
 
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new Fragment1()).commit();
             navigationView.setCheckedItem(R.id.nav1);
+
         }
     }
 
@@ -113,6 +122,10 @@ TextView gmail_text;
                 finish();
                 break;
             case R.id.nav3:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new StoreFragment()).commit();
+                break;
+            case R.id.nav4:
                 FirebaseAuth.getInstance().signOut();
                 Intent intent=new Intent(MainActivity.this, login.class);
                 startActivity(intent);
