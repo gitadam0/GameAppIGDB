@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StoreFragment">
+    tools:context=".store.StoreFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_local_grocery_store_24"
-        />
+
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:text="hhfhfh"
+       android:id="@+id/txt"/>
 
 </FrameLayout>

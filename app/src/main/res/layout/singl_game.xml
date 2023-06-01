@@ -110,7 +110,7 @@
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="50dp"
-                android:layout_height="25dp"
+                android:layout_height="20dp"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="12dp"
                 android:text="Genre : "
@@ -122,14 +122,23 @@
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="50dp"
-                android:layout_height="25dp"
+                android:layout_height="20dp"
                 android:layout_marginStart="12dp"
                 android:text="Mode : "
                 android:textColor="@color/white"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="97dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Release Date : "
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mode" />
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="97dp"
@@ -142,21 +151,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="97dp"
-                android:layout_height="26dp"
-                android:layout_marginStart="12dp"
-                android:text="Release Date : "
-                android:textColor="@color/white"
-                android:textSize="15dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
 
             <TextView
                 android:id="@+id/genre"
                 android:layout_width="318dp"
-                android:layout_height="26dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
 
                 android:text="Shooter, Adventure"
@@ -168,7 +168,7 @@
             <TextView
                 android:id="@+id/mode"
                 android:layout_width="320dp"
-                android:layout_height="25dp"
+                android:layout_height="wrap_content"
 
                 android:text="Shooter, Adventure"
                 android:textColor="#30C420"
