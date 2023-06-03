@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class networkUtils {
 
 
-    final static String USADARA_BASE_URL="https://restapiigdbgames.000webhostapp.com/index.php";
+    final static String USADARA_BASE_URL="https://restapiigdbgames.000webhostapp.com/index2.php";
 
     public static URL buildUrl(){
 
