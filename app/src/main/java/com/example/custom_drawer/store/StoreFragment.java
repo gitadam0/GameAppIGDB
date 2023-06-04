@@ -1,9 +1,14 @@
 package com.example.custom_drawer.store;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,9 +19,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.custom_drawer.MainActivity;
 import com.example.custom_drawer.R;
 import com.example.custom_drawer.database.Arraylist_games;
-import com.example.custom_drawer.recy_adapter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,14 +29,13 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 public class StoreFragment extends Fragment {
     TextView txt;
     RecyclerView store_recy;
     String result = "";
     ProgressDialog progressDialog;
-
+    recy_adapter_store adapter1 = null;
       ArrayList<STORE_GAMES> arrayList_games = new ArrayList<>();
 
 
@@ -50,14 +54,12 @@ public class StoreFragment extends Fragment {
 
 
         try {
-
-            progressDialog = new ProgressDialog(view.getContext());
-            progressDialog.setMessage("Loading..."); // Setting Message
-            progressDialog.setTitle("Loading Games"); // Setting Title
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
-            progressDialog.show(); // Display Progress Dialog
-            progressDialog.setCancelable(false);
-
+//            progressDialog = new ProgressDialog(view.getContext());
+//            progressDialog.setMessage("Loading..."); // Setting Message
+//            progressDialog.setTitle("Loading Games"); // Setting Title
+//            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+//            progressDialog.show(); // Display Progress Dialog
+//            progressDialog.setCancelable(false);
 
 
 
@@ -68,8 +70,6 @@ public class StoreFragment extends Fragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Toast.makeText(view.getContext(), arrayList_games + "", Toast.LENGTH_SHORT).show();
-
         return view;
     }
 
@@ -145,10 +145,9 @@ public class StoreFragment extends Fragment {
 
                 }
 
-                recy_adapter_store adapter1 = null;
+
 
                 adapter1=new recy_adapter_store(arrayList_games,getContext());
-
 
                 GridLayoutManager layoutManager = new GridLayoutManager(getContext(),2);
                 store_recy.setLayoutManager(layoutManager);
@@ -156,6 +155,8 @@ public class StoreFragment extends Fragment {
 
                 Arraylist_games.arraylist=arrayList_games;
                 progressDialog.dismiss();
+
+
 
 
 
@@ -184,4 +185,21 @@ public class StoreFragment extends Fragment {
     }
 
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Toast.makeText(getContext(), "111111111", Toast.LENGTH_SHORT).show();
+        if (requestCode==1){
+            Toast.makeText(getContext(), "22222222", Toast.LENGTH_SHORT).show();
+            if (resultCode==RESULT_OK){
+                adapter1.notifyDataSetChanged();
+                Toast.makeText(getContext(), Arraylist_games.arraylist.get(0).added_tocart+"000", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "00fdgfg0", Toast.LENGTH_SHORT).show();
+
+            }
+
+        }
+
+
+    }
 }

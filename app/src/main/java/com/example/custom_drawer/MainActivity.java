@@ -6,14 +6,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.custom_drawer.database.CartFragment;
 import com.example.custom_drawer.login_registration.login;
 import com.example.custom_drawer.store.StoreFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -25,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
 TextView gmail_text;
     DrawerLayout drawerLayout;
+    NavController navContoller;
 
     private FirebaseAuth mAuth;
 
@@ -71,7 +77,7 @@ TextView gmail_text;
 
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        Toast.makeText(this, currentUser.getEmail()+"", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, currentUser.getEmail()+"", Toast.LENGTH_SHORT).show();
 
 
         NavigationView navigationView=findViewById(R.id.navigation_view);
@@ -83,10 +89,15 @@ TextView gmail_text;
 
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new Fragment1()).commit();
-            navigationView.setCheckedItem(R.id.nav1);
+                    new StoreFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav3);
 
         }
+
+        //navContoller= Navigation.findNavController(MainActivity.this,R.id.fragment_container);
+        //NavigationUI.setupActionBarWithNavController(MainActivity.this,navContoller);
+
+
     }
 
     @Override
@@ -99,12 +110,20 @@ TextView gmail_text;
 
     }
 
-    /**
-     * Called when an item in the navigation menu is selected.
-     *
-     * @param item The selected item
-     * @return true to display the item as the selected item
-     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.current_place_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new CartFragment()).commit();
+        //navigationView.setCheckedItem(R.id.nav3);
+        return true;
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){

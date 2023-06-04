@@ -1,31 +1,44 @@
 package com.example.custom_drawer.store;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.custom_drawer.MainActivity;
 import com.example.custom_drawer.R;
 import com.example.custom_drawer.database.Arraylist_games;
 import com.example.custom_drawer.database.Igdbdata_top25_activity;
 import com.example.custom_drawer.recy_adapter_hory;
 import com.example.custom_drawer.screenshots_singlegam.Screenshots_view_adapter;
 import com.example.custom_drawer.single_game;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.FullscreenListener;
@@ -35,6 +48,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.ExecutionException;
 
 import kotlin.Unit;
@@ -44,14 +58,21 @@ import proto.Genre;
 
 public class single_game_store extends AppCompatActivity {
     ImageView img;
-    TextView name,progress,genre,mode,release,description;
+    TextView name,progress,genre,mode,release,description,price;
     ImageButton back;
     ProgressBar progressBar;
     ViewPager2 viewPager2;
     RecyclerView recy_hory;
     ProgressDialog progressDialog;
+    Dialog mydialog;
 
     STORE_GAMES single_game;
+
+    int indexofgame;
+
+    FloatingActionButton fab;
+    String imageurl="";
+
 
 
     @Override
@@ -59,6 +80,7 @@ public class single_game_store extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_game_store);
 
+        mydialog = new Dialog(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().hide();
@@ -73,6 +95,9 @@ public class single_game_store extends AppCompatActivity {
         mode=findViewById(R.id.mode);
         release=findViewById(R.id.release);
         description=findViewById(R.id.description);
+        price=findViewById(R.id.price);
+
+
 
 
 
@@ -82,19 +107,21 @@ public class single_game_store extends AppCompatActivity {
             if (games.name.equals(game_name)){
                 single_game=games;
 
+
             }
         }
 
 
 
 
-        String imageurl="";
+
         imageurl="https:"+"//images.igdb.com/igdb/image/upload/t_720p/"+single_game.cover_image_id+".jpg";
 
         Picasso.get().load(imageurl).into(img);
 
 
         name.setText(single_game.name);
+        price.setText(single_game.price+"$");
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -175,11 +202,14 @@ public class single_game_store extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 onBackPressed();
 
 
             }
         });
+
+
 
 
 
@@ -223,11 +253,121 @@ public class single_game_store extends AppCompatActivity {
         snapHelper.attachToRecyclerView(recy_hory);
 
 
+        fab=findViewById(R.id.single_fab);
+
+
+
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ShowPopup();
+//            }
+//        });
 
 
 
 
     }
+
+
+    public void ShowPopup(View v) {
+        TextView txtclose,popup_name,popup_price;
+        ImageView popup_img;
+        Spinner popup_spinner;
+        Button btnaddtocart;
+        mydialog.setContentView(R.layout.custom_popup);
+
+        popup_name=mydialog.findViewById(R.id.popup_name);
+        //popup_spinner=mydialog.findViewById(R.id.popup_spinner);
+        popup_price=mydialog.findViewById(R.id.popup_price);
+        popup_img=mydialog.findViewById(R.id.popup_img);
+        popup_name.setText(single_game.name);
+        popup_price.setText(single_game.price+"$");
+
+        txtclose =(TextView) mydialog.findViewById(R.id.txtclose);
+        Picasso.get().load(imageurl).into(popup_img);
+
+//        String[] countlist= {"0","1","2","3"};
+//        ArrayAdapter adapter=new ArrayAdapter(single_game_store.this, android.R.layout.simple_list_item_1,countlist);
+//        popup_spinner.setAdapter(adapter);
+
+
+        btnaddtocart = (Button) mydialog.findViewById(R.id.btnaddtocart);
+
+        if (single_game.added_tocart){
+            btnaddtocart.setText("remove to cart");
+
+        } else{
+            btnaddtocart.setText("add to cart");
+        }
+        btnaddtocart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(single_game_store.this, single_game.added_tocart+"", Toast.LENGTH_SHORT).show();
+                if (single_game.added_tocart){
+                    single_game.added_tocart=false;
+                    btnaddtocart.setText("add to cart");
+
+                    Toast.makeText(single_game_store.this, "removed from cart", Toast.LENGTH_SHORT).show();
+
+
+//                    setResult(RESULT_OK,getIntent());
+//                    finish();
+
+                } else{
+                    single_game.added_tocart=true;
+                    btnaddtocart.setText("remove from cart");
+                    Toast.makeText(single_game_store.this, " added to cart", Toast.LENGTH_SHORT).show();
+
+
+
+//                    setResult(RESULT_OK,getIntent());
+//                    finish();
+
+                }
+            }
+        });
+
+
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                if (Arraylist_games.arraylist.get(0).added_tocart){
+//                    single_game.added_tocart=false;
+//                    Arraylist_games.arraylist.get(0).added_tocart=false;
+//
+//                    Toast.makeText(single_game_store.this, "removed from cart", Toast.LENGTH_SHORT).show();
+//
+//
+//                    setResult(RESULT_OK,getIntent());
+//                    finish();
+//
+//                } else{
+//                    single_game.added_tocart=true;
+//                    Arraylist_games.arraylist.get(0).added_tocart=true;
+//                    Toast.makeText(single_game_store.this, " added to cart", Toast.LENGTH_SHORT).show();
+//
+//
+//
+//                    setResult(RESULT_OK,getIntent());
+//                    finish();
+//
+//                }
+                mydialog.dismiss();
+            }
+        });
+
+        mydialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        mydialog.show();
+
+
+
+
+
+
+    }
+
+
 
     public class ProgressBarAnimation extends Animation {
         private ProgressBar progressBar;
@@ -251,4 +391,13 @@ public class single_game_store extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+
+
+
+
+    }
 }

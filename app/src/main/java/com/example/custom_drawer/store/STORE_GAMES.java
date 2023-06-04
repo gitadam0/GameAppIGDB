@@ -13,6 +13,7 @@ public class STORE_GAMES {
     String cover_image_id;
     String video_id;
     String screenshots_image_id;
+    Boolean added_tocart=false;
 //    public STORE_GAMES(String name){
 //        this.name=name;
 //    }

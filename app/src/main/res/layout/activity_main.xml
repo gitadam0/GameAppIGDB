@@ -23,6 +23,7 @@
         app:titleTextColor="@color/white"
         android:id="@+id/toolbar"
         app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
+        app:menu="@menu/current_place_menu"
         />
 
     <FrameLayout

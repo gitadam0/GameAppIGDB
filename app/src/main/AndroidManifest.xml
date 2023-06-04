@@ -46,7 +46,7 @@
             android:name=".store.single_game_store"
             android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
             android:exported="false">
-            >
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
